@@ -1,0 +1,166 @@
+/* ════ WELLNESS PAGE CSS ════ */
+
+/* Why Sri Lanka Grid */
+.wellness-reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.wellness-reason-card {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wellness-reason-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.wellness-reason-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.5rem;
+    background-color: var(--color-sand);
+    color: var(--color-earth);
+    border-radius: 50%;
+}
+
+.wellness-reason-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--color-charcoal);
+}
+
+.wellness-reason-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+/* Packages Grid */
+.wellness-packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin-top: 4rem;
+}
+
+.wellness-package-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.wellness-package-card__image {
+    position: relative;
+    padding-top: 60%;
+    overflow: hidden;
+}
+
+.wellness-package-card__image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.wellness-package-card:hover .wellness-package-card__image img {
+    transform: scale(1.05);
+}
+
+.wellness-package-card__content {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.wellness-package-card__content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--color-charcoal);
+}
+
+.wellness-package-card__desc {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+}
+
+.wellness-package-card__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    flex: 1;
+}
+
+.wellness-package-card__features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--color-charcoal);
+}
+
+.wellness-package-card__features li svg {
+    color: var(--color-earth);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.wellness-package-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-sand);
+    margin-top: auto;
+}
+
+.wellness-package-card__price {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-deep-green);
+    margin: 0;
+}
+
+/* Trust Grid */
+.wellness-trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+    text-align: left;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wellness-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--color-white);
+    font-size: 1rem;
+}

@@ -1,0 +1,406 @@
+/* ═══════════════ HERO ═══════════════ */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero__bg {
+    position: absolute;
+    inset: 0;
+}
+
+.hero__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+}
+
+.hero__content {
+    position: relative;
+    z-index: 2;
+    padding-top: 5rem;
+}
+
+.hero__inner {
+    max-width: 720px;
+}
+
+.hero__badge {
+    margin-bottom: 1.5rem;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--color-white);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+}
+
+.hero__headline {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+    color: var(--color-white);
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+    font-weight: 400;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
+}
+
+.hero__subtext {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.88);
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    max-width: 540px;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hero__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Scroll indicator */
+.hero__scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: bounce 2s ease infinite;
+}
+
+.hero__scroll-dot {
+    width: 24px;
+    height: 38px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    position: relative;
+}
+
+.hero__scroll-dot::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 2px;
+    animation: scrollDot 1.8s ease infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(6px);
+    }
+}
+
+@keyframes scrollDot {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(14px);
+    }
+}
+
+/* ═══════════════ TRUST SECTION ═══════════════ */
+.trust-section .trust-bar {
+    margin-top: var(--space-lg);
+}
+
+/* ═══════════════ TOURS GRID ═══════════════ */
+.tours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.tour-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.tour-card .card__image {
+    aspect-ratio: 3/2;
+}
+
+.tour-card__days-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(28, 59, 42, 0.85);
+    color: var(--color-white);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(4px);
+}
+
+.tour-card__title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.tour-card__desc {
+    font-size: 0.88rem;
+    margin-bottom: 1.25rem;
+    flex: 1;
+}
+
+.tour-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    border-top: 1px solid var(--color-sand);
+    padding-top: 1rem;
+}
+
+.tour-card__price {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+
+.tour-card__price strong {
+    color: var(--color-deep-green);
+    font-size: 1.05rem;
+    font-family: var(--font-serif);
+}
+
+/* ═══════════════ DESTINATIONS ═══════════════ */
+.destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+}
+
+.dest-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.dest-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+}
+
+.dest-card__image {
+    position: relative;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+}
+
+.dest-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.dest-card:hover .dest-card__image img {
+    transform: scale(1.08);
+}
+
+.dest-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(28, 59, 42, 0.85) 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
+}
+
+.dest-card__info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.25rem 1rem;
+    color: var(--color-white);
+}
+
+.dest-card__name {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-white);
+    margin-bottom: 0.3rem;
+}
+
+.dest-card__desc {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.dest-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-sand);
+}
+
+/* ═══════════════ TESTIMONIALS ═══════════════ */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    backdrop-filter: blur(4px);
+    transition: all var(--transition-base);
+}
+
+.testimonial-card:hover {
+    background: rgba(255, 255, 255, 0.09);
+    transform: translateY(-4px);
+}
+
+.testimonial-card__stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 1rem;
+}
+
+.testimonial-card__quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.08rem;
+    color: rgba(245, 237, 211, 0.9);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-card__author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.testimonial-card__avatar {
+    width: 44px;
+    height: 44px;
+    background: var(--color-earth);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--color-white);
+    flex-shrink: 0;
+}
+
+.testimonial-card__name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-sand);
+    margin-bottom: 0.1rem;
+}
+
+.testimonial-card__country {
+    font-size: 0.8rem;
+    color: rgba(245, 237, 211, 0.55);
+}
+
+/* ═══════════════ LEAD MAGNET ═══════════════ */
+.lead-magnet {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.lead-magnet__content h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* ═══════════════ CTA SECTION ═══════════════ */
+.cta-section {
+    position: relative;
+    padding: var(--space-3xl) 0;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.cta-section__bg {
+    position: absolute;
+    inset: 0;
+}
+
+.cta-section__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cta-section__content {
+    position: relative;
+    z-index: 2;
+}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 900px) {
+    .destinations-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .lead-magnet {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+}
+
+@media (max-width: 600px) {
+    .destinations-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero__actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .lead-magnet {
+        padding: var(--space-lg);
+    }
+}
