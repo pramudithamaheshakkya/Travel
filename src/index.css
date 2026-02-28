@@ -43,11 +43,11 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 4px rgba(0,0,0,0.08);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
-  --shadow-xl: 0 16px 48px rgba(0,0,0,0.18);
-  --shadow-green: 0 8px 32px rgba(28,59,42,0.18);
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.18);
+  --shadow-green: 0 8px 32px rgba(28, 59, 42, 0.18);
 
   /* Transitions */
   --transition-fast: 0.15s ease;
@@ -61,7 +61,9 @@
 }
 
 /* ======================== RESET ======================== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -100,22 +102,37 @@ button {
   background: none;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
 /* ======================== TYPOGRAPHY ======================== */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--font-serif);
   font-weight: 400;
   line-height: 1.2;
   color: var(--color-deep-green);
 }
 
-h1 { font-size: clamp(2.4rem, 5vw, 4rem); }
-h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
-h3 { font-size: clamp(1.3rem, 2.5vw, 1.9rem); }
-h4 { font-size: clamp(1.1rem, 2vw, 1.4rem); }
+h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+}
+
+h3 {
+  font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+}
+
+h4 {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+}
 
 p {
   font-size: clamp(0.95rem, 1.5vw, 1.05rem);
@@ -138,6 +155,15 @@ p {
 
 .section {
   padding: var(--space-2xl) 0;
+}
+
+.main-content {
+  padding-top: 85px;
+  /* Height of the header */
+}
+
+.main-content--home {
+  padding-top: 0;
 }
 
 .section--dark {
@@ -237,11 +263,11 @@ p {
 .btn--ghost-white {
   background-color: transparent;
   color: var(--color-white);
-  border: 1.5px solid rgba(255,255,255,0.7);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
 }
 
 .btn--ghost-white:hover {
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   border-color: var(--color-white);
 }
 
@@ -388,13 +414,13 @@ p {
 .overlay-dark {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(28,59,42,0.6) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 0%, rgba(28, 59, 42, 0.6) 100%);
 }
 
 .overlay-green {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(28,59,42,0.85) 0%, rgba(45,90,61,0.7) 100%);
+  background: linear-gradient(135deg, rgba(28, 59, 42, 0.85) 0%, rgba(45, 90, 61, 0.7) 100%);
 }
 
 /* ======================== IMAGE PLACEHOLDERS ======================== */
@@ -405,7 +431,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.85rem;
 }
 
@@ -433,8 +459,15 @@ p {
 }
 
 @keyframes whatsapp-pulse {
-  0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45); }
-  50% { box-shadow: 0 4px 28px rgba(37, 211, 102, 0.7); }
+
+  0%,
+  100% {
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+  }
+
+  50% {
+    box-shadow: 0 4px 28px rgba(37, 211, 102, 0.7);
+  }
 }
 
 /* ======================== SCROLL ANIMATIONS ======================== */
@@ -486,12 +519,19 @@ p {
     padding: var(--space-xl) 0;
   }
 
-  .grid-2, .grid-3, .grid-4 {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
     grid-template-columns: 1fr;
   }
 
-  h1 { font-size: 2.2rem; }
-  h2 { font-size: 1.7rem; }
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+  }
 }
 
 @media (max-width: 480px) {

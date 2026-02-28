@@ -34,29 +34,31 @@ function AppLayout() {
     <>
       <ScrollToTop />
       <Header />
-      <Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/private-tours" element={<PrivateToursPage />} />
-          <Route path="/honeymoon" element={<HoneymoonPage />} />
-          <Route path="/wellness" element={<WellnessPage />} />
-          <Route path="/wildlife" element={<WildlifePage />} />
-          <Route path="/destinations" element={<DestinationsPage />} />
-          <Route path="/destinations/:slug" element={<DestinationDetailPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:slug" element={<BlogPage />} />
-          {/* 404 */}
-          <Route path="*" element={
-            <main style={{ textAlign: 'center', padding: '10rem 2rem' }}>
-              <h2>Page Not Found</h2>
-              <p style={{ marginBottom: '2rem' }}>The page you're looking for doesn't exist.</p>
-              <a href="/" className="btn btn--primary">Go Home</a>
-            </main>
-          } />
-        </Routes>
-      </Suspense>
+      <main className={`main-content ${location.pathname === '/' ? 'main-content--home' : ''}`}>
+        <Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/private-tours" element={<PrivateToursPage />} />
+            <Route path="/honeymoon" element={<HoneymoonPage />} />
+            <Route path="/wellness" element={<WellnessPage />} />
+            <Route path="/wildlife" element={<WildlifePage />} />
+            <Route path="/destinations" element={<DestinationsPage />} />
+            <Route path="/destinations/:slug" element={<DestinationDetailPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPage />} />
+            {/* 404 */}
+            <Route path="*" element={
+              <div style={{ textAlign: 'center', padding: '10rem 2rem' }}>
+                <h2>Page Not Found</h2>
+                <p style={{ marginBottom: '2rem' }}>The page you're looking for doesn't exist.</p>
+                <a href="/" className="btn btn--primary">Go Home</a>
+              </div>
+            } />
+          </Routes>
+        </Suspense>
+      </main>
       <Footer />
       <WhatsAppButton />
     </>
