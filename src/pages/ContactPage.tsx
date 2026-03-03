@@ -16,12 +16,39 @@ export default function ContactPage() {
     const { t } = useTranslation();
     const [submitted, setSubmitted] = useState(false);
     const [form, setForm] = useState({
-        name: '', country: '', dates: '', nights: '', budget: '', interests: '', whatsapp: '',
+        name: '', email: '', country: '', dates: '', nights: '', budget: '', interests: '', whatsapp: '', website: '',
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmitted(true);
+        setIsSubmitting(true);
+        setError(null);
+
+        try {
+            const formData = new FormData();
+            Object.entries(form).forEach(([key, value]) => {
+                formData.append(key, value);
+            });
+
+            const response = await fetch('/send-mail.php', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (data.status === 'success') {
+                setSubmitted(true);
+            } else {
+                setError(data.message || 'Something went wrong. Please try again later.');
+            }
+        } catch (err) {
+            setError('Failed to connect to the server. Please check your internet connection and try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -59,6 +86,11 @@ export default function ContactPage() {
                             </div>
                         ) : (
                             <form className="contact-form" onSubmit={handleSubmit}>
+                                {error && (
+                                    <div className="contact-error" style={{ color: '#dc2626', backgroundColor: '#fee2e2', padding: '1rem', borderRadius: '0.5rem', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+                                        {error}
+                                    </div>
+                                )}
                                 <div className="form-row">
                                     <div className="form-group">
                                         <label htmlFor="contact-name">{t('contact.form_name')} *</label>
@@ -69,6 +101,16 @@ export default function ContactPage() {
                                         />
                                     </div>
                                     <div className="form-group">
+                                        <label htmlFor="contact-email">Email Address *</label>
+                                        <input
+                                            id="contact-email" type="email" required
+                                            value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
+                                            placeholder="your@email.com"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="form-row">
+                                    <div className="form-group">
                                         <label htmlFor="contact-country">{t('contact.form_country')} *</label>
                                         <select
                                             id="contact-country" required
@@ -78,7 +120,26 @@ export default function ContactPage() {
                                             {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
                                         </select>
                                     </div>
+                                    <div className="form-group">
+                                        <label htmlFor="contact-whatsapp">{t('contact.form_whatsapp')}</label>
+                                        <input
+                                            id="contact-whatsapp" type="tel"
+                                            value={form.whatsapp} onChange={e => setForm({ ...form, whatsapp: e.target.value })}
+                                            placeholder="+44 7xxx xxxxxx"
+                                        />
+                                    </div>
                                 </div>
+
+                                <div className="form-row" style={{ display: 'none' }}>
+                                    <div className="form-group">
+                                        <label htmlFor="website">Website</label>
+                                        <input
+                                            id="website" type="text" autoComplete="off"
+                                            value={form.website} onChange={e => setForm({ ...form, website: e.target.value })}
+                                        />
+                                    </div>
+                                </div>
+
                                 <div className="form-row">
                                     <div className="form-group">
                                         <label htmlFor="contact-dates">{t('contact.form_dates')}</label>
@@ -120,16 +181,13 @@ export default function ContactPage() {
                                         placeholder={t('contact.interests_placeholder')}
                                     />
                                 </div>
-                                <div className="form-group">
-                                    <label htmlFor="contact-whatsapp">{t('contact.form_whatsapp')}</label>
-                                    <input
-                                        id="contact-whatsapp" type="tel"
-                                        value={form.whatsapp} onChange={e => setForm({ ...form, whatsapp: e.target.value })}
-                                        placeholder="+44 7xxx xxxxxx"
-                                    />
-                                </div>
-                                <button type="submit" className="btn btn--primary btn--lg" style={{ width: '100%', justifyContent: 'center' }}>
-                                    {t('contact.form_submit')} <ArrowRight size={18} />
+                                <button
+                                    type="submit"
+                                    className="btn btn--primary btn--lg"
+                                    style={{ width: '100%', justifyContent: 'center' }}
+                                    disabled={isSubmitting}
+                                >
+                                    {isSubmitting ? 'Sending...' : t('contact.form_submit')} <ArrowRight size={18} />
                                 </button>
                             </form>
                         )}

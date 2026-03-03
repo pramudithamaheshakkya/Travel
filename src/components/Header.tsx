@@ -74,14 +74,18 @@ export default function Header() {
                 {/* Right Controls */}
                 <div className="header__controls">
                     {/* Language Switcher */}
-                    <div className="lang-switcher" onMouseLeave={() => setLangOpen(false)}>
+                    <div
+                        className="lang-switcher"
+                        onMouseEnter={() => setLangOpen(true)}
+                        onMouseLeave={() => setLangOpen(false)}
+                    >
                         <button
                             className="lang-switcher__trigger"
                             onClick={() => setLangOpen(!langOpen)}
                             aria-label="Switch language"
                             aria-expanded={langOpen}
                         >
-                            <Globe size={15} />
+                            <Globe size={18} />
                             <span>{currentLang.flag} {currentLang.code.toUpperCase()}</span>
                             <ChevronDown size={13} className={langOpen ? 'rotated' : ''} />
                         </button>
