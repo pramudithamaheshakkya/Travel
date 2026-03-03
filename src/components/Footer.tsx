@@ -82,8 +82,8 @@ export default function Footer() {
                 <div className="footer__bottom">
                     <p className="footer__copyright">{t('footer.copyright')}</p>
                     <div className="footer__legal">
-                        <a href="#">{t('footer.gdpr')}</a>
-                        <a href="#">{t('footer.cookies')}</a>
+                        <Link to="/privacy-policy">{t('footer.gdpr')}</Link>
+                        <Link to="/cookie-policy">{t('footer.cookies')}</Link>
                     </div>
                 </div>
             </div>

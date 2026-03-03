@@ -20,6 +20,8 @@ import './pages/ContactPage.css';
 import './pages/SharedPages.css';
 import './pages/DestinationDetailPage.css';
 import './pages/DestinationsPage.css';
+const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
+const CookiePolicy = React.lazy(() => import('./pages/CookiePolicy'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -44,6 +46,8 @@ function AppLayout() {
             <Route path="/wildlife" element={<WildlifePage />} />
             <Route path="/destinations" element={<DestinationsPage />} />
             <Route path="/destinations/:slug" element={<DestinationDetailPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/cookie-policy" element={<CookiePolicy />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/blog" element={<BlogPage />} />
