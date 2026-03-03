@@ -4,8 +4,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Mail, Phone, MessageCircle, ArrowRight } from 'lucide-react';
 import './ContactPage.css';
 
-const COUNTRIES = ['United Kingdom', 'Germany', 'France', 'Australia', 'USA', 'Canada', 'Netherlands', 'Switzerland', 'Other'];
-const NIGHTS = ['7 nights', '10 nights', '12 nights', '14 nights', '16+ nights'];
+
 
 const fadeUp = {
     hidden: { opacity: 0, y: 40 },
@@ -16,39 +15,22 @@ export default function ContactPage() {
     const { t } = useTranslation();
     const [submitted, setSubmitted] = useState(false);
     const [form, setForm] = useState({
-        name: '', email: '', country: '', dates: '', nights: '', budget: '', interests: '', whatsapp: '', website: '',
+        name: '', email: '', interests: '', website: '',
     });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setIsSubmitting(true);
-        setError(null);
 
-        try {
-            const formData = new FormData();
-            Object.entries(form).forEach(([key, value]) => {
-                formData.append(key, value);
-            });
+        const message = `New Form Submission:
+Name: ${form.name}
+Email: ${form.email}
+Message: ${form.interests}`;
 
-            const response = await fetch('/send-mail.php', {
-                method: 'POST',
-                body: formData,
-            });
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/94705522299?text=${encodedMessage}`;
 
-            const data = await response.json();
-
-            if (data.status === 'success') {
-                setSubmitted(true);
-            } else {
-                setError(data.message || 'Something went wrong. Please try again later.');
-            }
-        } catch (err) {
-            setError('Failed to connect to the server. Please check your internet connection and try again.');
-        } finally {
-            setIsSubmitting(false);
-        }
+        window.open(whatsappUrl, '_blank');
+        setSubmitted(true);
     };
 
     return (
@@ -86,11 +68,6 @@ export default function ContactPage() {
                             </div>
                         ) : (
                             <form className="contact-form" onSubmit={handleSubmit}>
-                                {error && (
-                                    <div className="contact-error" style={{ color: '#dc2626', backgroundColor: '#fee2e2', padding: '1rem', borderRadius: '0.5rem', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
-                                        {error}
-                                    </div>
-                                )}
                                 <div className="form-row">
                                     <div className="form-group">
                                         <label htmlFor="contact-name">{t('contact.form_name')} *</label>
@@ -109,25 +86,14 @@ export default function ContactPage() {
                                         />
                                     </div>
                                 </div>
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label htmlFor="contact-country">{t('contact.form_country')} *</label>
-                                        <select
-                                            id="contact-country" required
-                                            value={form.country} onChange={e => setForm({ ...form, country: e.target.value })}
-                                        >
-                                            <option value="">Select country...</option>
-                                            {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
-                                        </select>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="contact-whatsapp">{t('contact.form_whatsapp')}</label>
-                                        <input
-                                            id="contact-whatsapp" type="tel"
-                                            value={form.whatsapp} onChange={e => setForm({ ...form, whatsapp: e.target.value })}
-                                            placeholder="+44 7xxx xxxxxx"
-                                        />
-                                    </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="contact-interests">Interests & Preferences *</label>
+                                    <textarea
+                                        id="contact-interests" rows={6} required
+                                        value={form.interests} onChange={e => setForm({ ...form, interests: e.target.value })}
+                                        placeholder={t('contact.interests_placeholder')}
+                                    />
                                 </div>
 
                                 <div className="form-row" style={{ display: 'none' }}>
@@ -140,54 +106,12 @@ export default function ContactPage() {
                                     </div>
                                 </div>
 
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label htmlFor="contact-dates">{t('contact.form_dates')}</label>
-                                        <input
-                                            id="contact-dates" type="text"
-                                            value={form.dates} onChange={e => setForm({ ...form, dates: e.target.value })}
-                                            placeholder="e.g. March 2025 or April 10–24"
-                                        />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="contact-nights">{t('contact.form_nights')}</label>
-                                        <select
-                                            id="contact-nights"
-                                            value={form.nights} onChange={e => setForm({ ...form, nights: e.target.value })}
-                                        >
-                                            <option value="">Select nights...</option>
-                                            {NIGHTS.map(n => <option key={n} value={n}>{n}</option>)}
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="contact-budget">{t('contact.form_budget')}</label>
-                                    <select
-                                        id="contact-budget"
-                                        value={form.budget} onChange={e => setForm({ ...form, budget: e.target.value })}
-                                    >
-                                        <option value="">Select budget range...</option>
-                                        <option>{t('contact.budget_options.opt1')}</option>
-                                        <option>{t('contact.budget_options.opt2')}</option>
-                                        <option>{t('contact.budget_options.opt3')}</option>
-                                        <option>{t('contact.budget_options.opt4')}</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="contact-interests">{t('contact.form_interests')}</label>
-                                    <textarea
-                                        id="contact-interests" rows={4}
-                                        value={form.interests} onChange={e => setForm({ ...form, interests: e.target.value })}
-                                        placeholder={t('contact.interests_placeholder')}
-                                    />
-                                </div>
                                 <button
                                     type="submit"
                                     className="btn btn--primary btn--lg"
                                     style={{ width: '100%', justifyContent: 'center' }}
-                                    disabled={isSubmitting}
                                 >
-                                    {isSubmitting ? 'Sending...' : t('contact.form_submit')} <ArrowRight size={18} />
+                                    {t('contact.form_submit')} <ArrowRight size={18} />
                                 </button>
                             </form>
                         )}

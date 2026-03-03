@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Contact Form Demo</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .message {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Secure Contact Form</h2>
+        <div id="status-message" class="message"></div>
+        <form id="secure-form" method="POST" action="process.php">
+            <!-- CSRF Token (Normally generated server-side) -->
+            <input type="hidden" name="csrf_token" value="demo_token_12345">
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+
+            <!-- reCAPTCHA Placeholder -->
+            <div class="form-group">
+                <div
+                    style="background: #eee; padding: 1rem; text-align: center; font-size: 0.8rem; border: 1px dashed #999;">
+                    [reCAPTCHA Widget Here]
+                </div>
+            </div>
+
+            <button type="submit">Send Securely</button>
+        </form>
+    </div>
+
+    <script>
+        // Simple demo handler to show how JS handles the secure response
+        document.getElementById('secure-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const status = document.getElementById('status-message');
+            status.style.display = 'none';
+
+            const formData = new FormData(e.target);
+            try {
+                const response = await fetch('process.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                status.textContent = data.message;
+                status.className = `message ${data.status}`;
+                status.style.display = 'block';
+
+                if (data.status === 'success') e.target.reset();
+            } catch (err) {
+                status.textContent = "Connection error. Please ensure PHP is running.";
+                status.className = 'message error';
+                status.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>
