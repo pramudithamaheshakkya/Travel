@@ -13,11 +13,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="footer__brand">
                         <Link to="/" className="footer__logo">
-                            <span className="footer__logo-mark">Z</span>
-                            <span className="footer__logo-text">
-                                <span>Zelenso</span>
-                                <span>Travel</span>
-                            </span>
+                            <img src="/logo.png" alt="Zelenso Travels" className="footer__logo-img" />
                         </Link>
                         <p className="footer__tagline">{t('footer.tagline')}</p>
                         <div className="footer__socials">

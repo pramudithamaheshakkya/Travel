@@ -51,11 +51,7 @@ export default function Header() {
             <div className="header__inner container">
                 {/* Logo */}
                 <Link to="/" className="header__logo">
-                    <span className="header__logo-mark">Z</span>
-                    <span className="header__logo-text">
-                        <span className="header__logo-name">Zelenso</span>
-                        <span className="header__logo-sub">Travel</span>
-                    </span>
+                    <img src="/logo.png" alt="Zelenso Travels" className="header__logo-img" />
                 </Link>
 
                 {/* Desktop Nav */}
